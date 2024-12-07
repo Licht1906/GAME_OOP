@@ -26,12 +26,12 @@ public class ChapterMenu {
         AnchorPane chapterPane = new AnchorPane();
 
         // Tạo background cho menu chọn chapter
-        String imagePath = "C:/Users/ADMIN/Downloads/ProjectGame2D/Project_OOP_IT3100/res/MenuImage/menu_wallpaper.jpg";
+        String imagePath = "C:/Users/Vu/Downloads/Project_OOP_IT3100/res/MenuImage/menu_wallpaper.jpg";
         Image background = new Image(Paths.get(imagePath).toUri().toString());
         ImageView backgroundView = new ImageView(background);
 
         // Tạo nút Chapter 1
-        String chapter1Path = "C:/Users/ADMIN/Downloads/ProjectGame2D/Project_OOP_IT3100/res/MenuImage/chapter1_button.png";
+        String chapter1Path = "C:/Users/Vu/Downloads/Project_OOP_IT3100/res/MenuImage/chapter1_button.png";
         Image chapter1Image = new Image(Paths.get(chapter1Path).toUri().toString());
         ImageView chapter1View = new ImageView(chapter1Image);
         Button chapter1Button = new Button();
@@ -42,7 +42,7 @@ public class ChapterMenu {
 
 
         // Tạo nút Chapter 2
-        String chapter2Path = "C:/Users/ADMIN/Downloads/ProjectGame2D/Project_OOP_IT3100/res/MenuImage/chapter2_button.png";
+        String chapter2Path = "C:/Users/Vu/Downloads/Project_OOP_IT3100/res/MenuImage/chapter2_button.png";
         Image chapter2Image = new Image(Paths.get(chapter2Path).toUri().toString());
         ImageView chapter2View = new ImageView(chapter2Image);
         Button chapter2Button = new Button();
@@ -52,7 +52,7 @@ public class ChapterMenu {
         AnchorPane.setTopAnchor(chapter2Button, 475.0);
 
         // Tạo nút Chapter 3
-        String chapter3Path = "C:/Users/ADMIN/Downloads/ProjectGame2D/Project_OOP_IT3100/res/MenuImage/chapter3_button.png";
+        String chapter3Path = "C:/Users/Vu/Downloads/Project_OOP_IT3100/res/MenuImage/chapter3_button.png";
         Image chapter3Image = new Image(Paths.get(chapter3Path).toUri().toString());
         ImageView chapter3View = new ImageView(chapter3Image);
         Button chapter3Button = new Button();
@@ -85,7 +85,7 @@ public class ChapterMenu {
         });
 
         // Tạo nút back về menu chính
-        String backButtonPath = "C:/Users/ADMIN/Downloads/ProjectGame2D/Project_OOP_IT3100/res/MenuImage/back_button.png";
+        String backButtonPath = "C:/Users/Vu/Downloads/Project_OOP_IT3100/res/MenuImage/back_button.png";
         Image backButtonImage = new Image(Paths.get(backButtonPath).toUri().toString());
         ImageView backButtonView = new ImageView(backButtonImage);
         Button backButton = new Button();

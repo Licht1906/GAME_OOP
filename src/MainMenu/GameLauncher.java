@@ -36,7 +36,7 @@ public class GameLauncher extends Application {
 
     // cai dat nhac nen
     private void initializeBackgroundMusic(){
-        String musicPath = "C:/Users/ADMIN/Downloads/ProjectGame2D/Project_OOP_IT3100/res/Sound/background_music.mp3";
+        String musicPath = "C:/Users/Vu/Downloads/Project_OOP_IT3100/res/Sound/background_music.mp3";
         Media backgroundMusic = new Media(Paths.get(musicPath).toUri().toString());
         musicPlayer = new MediaPlayer(backgroundMusic);
         musicPlayer.setCycleCount(MediaPlayer.INDEFINITE);
@@ -51,7 +51,7 @@ public class GameLauncher extends Application {
         }
 
         // Tạo Media và MediaPlayer cho video background
-        String menuPath = "C:/Users/ADMIN/Downloads/ProjectGame2D/Project_OOP_IT3100/res/MenuImage/background.mp4";
+        String menuPath = "C:/Users/Vu/Downloads/Project_OOP_IT3100/res/MenuImage/background.mp4";
         Media backgroundMedia = new Media(Paths.get(menuPath).toUri().toString());
         MediaPlayer backgroundMediaPlayer = new MediaPlayer(backgroundMedia);
         MediaView backgroundMediaView = new MediaView(backgroundMediaPlayer);
@@ -63,7 +63,7 @@ public class GameLauncher extends Application {
         backgroundMediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
 
         // Tạo start button
-        String startImagePath = "C:/Users/ADMIN/Downloads/ProjectGame2D/Project_OOP_IT3100/res/MenuImage/start_button.png";
+        String startImagePath = "C:/Users/Vu/Downloads/Project_OOP_IT3100/res/MenuImage/start_button.png";
         Image startButtonImage = new Image(Paths.get(startImagePath).toUri().toString());
         ImageView startButtonView = new ImageView(startButtonImage);
         Button startButton = new Button();
@@ -79,7 +79,7 @@ public class GameLauncher extends Application {
         });
 
         // Tạo setting button
-        String settingImagePath = "C:/Users/ADMIN/Downloads/ProjectGame2D/Project_OOP_IT3100/res/MenuImage/setting_button.png";
+        String settingImagePath = "C:/Users/Vu/Downloads/Project_OOP_IT3100/res/MenuImage/setting_button.png";
         Image settingButtonImage = new Image(Paths.get(settingImagePath).toUri().toString());
         ImageView settingButtonView = new ImageView(settingButtonImage);
         Button settingButton = new Button();
@@ -97,7 +97,7 @@ public class GameLauncher extends Application {
         });
 
         // Tạo tutorial button
-        String tutorialImagePath = "C:/Users/ADMIN/Downloads/ProjectGame2D/Project_OOP_IT3100/res/MenuImage/tutorial_button.png";
+        String tutorialImagePath = "C:/Users/Vu/Downloads/Project_OOP_IT3100/res/MenuImage/tutorial_button.png";
         Image tutorialButtonImage = new Image(Paths.get(tutorialImagePath).toUri().toString());
         ImageView tutorialButtonView = new ImageView(tutorialButtonImage);
         Button tutorialButton = new Button();
@@ -113,7 +113,7 @@ public class GameLauncher extends Application {
         });
 
         // Tạo exit button
-        String exitImagePath = "C:/Users/ADMIN/Downloads/ProjectGame2D/Project_OOP_IT3100/res/MenuImage/exit_button.png";
+        String exitImagePath = "C:/Users/Vu/Downloads/Project_OOP_IT3100/res/MenuImage/exit_button.png";
         Image exitButtonImage = new Image(Paths.get(exitImagePath).toUri().toString());
         ImageView exitButtonView = new ImageView(exitButtonImage);
         Button exitButton = new Button();
@@ -141,7 +141,7 @@ public class GameLauncher extends Application {
     // Hiển thị video intro
     private void showIntro() {
         // Tạo Media và MediaPlayer cho video intro
-        String mediaPath = "C:/Users/ADMIN/Downloads/ProjectGame2D/Project_OOP_IT3100/res/MenuImage/intro.mp4";
+        String mediaPath = "C:/Users/Vu/Downloads/Project_OOP_IT3100/res/MenuImage/intro.mp4";
         Media media = new Media(Paths.get(mediaPath).toUri().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(media);
         MediaView mediaView = new MediaView(mediaPlayer);

@@ -27,15 +27,6 @@ import javafx.util.Duration;
 import java.io.File;
 import java.nio.file.Paths;
 
-
-
-
-
-
-
-
-
-
 public class Chapter1 extends Pane {
     private GraphicsContext gc;
     private final GameLauncher gameLauncher;
@@ -49,7 +40,7 @@ public class Chapter1 extends Pane {
     private StackPane root;
     private StackPane overlayPane;
     private int count = 0;
-
+    private javafx.animation.AnimationTimer gameLoop;
 
     private final int originalTileSize = 20;  // Kích thước gốc của tile
     private final int scale = 3;              // Tỷ lệ scale
@@ -63,19 +54,13 @@ public class Chapter1 extends Pane {
     public Image backgroundImage;
     private Player player;
     KeyHandlers keyH = new KeyHandlers();
-
+    private Canvas canvas;
 
 
 
     public Chapter1(GameLauncher gameLauncher, ChapterMenu chapterMenu){
         this.gameLauncher = gameLauncher;
         this.chapterMenu = chapterMenu;
-
-
-
-
-
-
     }
 
 
@@ -84,7 +69,7 @@ public class Chapter1 extends Pane {
         isPlaying = true;
         isPaused = false;
         this.stage = stage;
-        String musicPath = "C:/Users/ADMIN/Downloads/ProjectGame2D/Project_OOP_IT3100/res/Sound/Chapter1_sound.mp3";
+        String musicPath = "C:/Users/Vu/Downloads/Project_OOP_IT3100/res/Sound/Chapter1_sound.mp3";
         Media music = new Media(Paths.get(musicPath).toUri().toString());
         chapter1MusicPlayer = new MediaPlayer(music);
 
@@ -136,140 +121,100 @@ public class Chapter1 extends Pane {
     public void showChapter1Background(Stage stage) {
         // Tạo giao diện cho Chapter 1
         this.stage = stage;
-
-        /*// Đọc ảnh nền
-        String backgroundPath = "C:/Users/ADMIN/Downloads/ProjectGame2D/Project_OOP_IT3100/res/Background/background_chap1.jpg";
-        Image background = new Image(Paths.get(backgroundPath).toUri().toString());
-        ImageView backgroundView = new ImageView(background);
-
-        // Cập nhật tỷ lệ ảnh nền
-        backgroundView.setFitWidth(screenWidth);   // Đặt chiều rộng của ảnh nền
-        backgroundView.setFitHeight(screenHeight); // Đặt chiều cao của ảnh nền
-        backgroundView.setPreserveRatio(true);     // Giữ tỷ lệ gốc của hình ảnh
-        getChildren().add(backgroundView);*/
-
-        Canvas canvas = new Canvas(screenWidth, screenHeight);
-        getChildren().add(canvas);
+        if (player == null) {
+            player = new Player(this, keyH); // Chỉ khởi tạo nếu chưa có
+        }
+        if (canvas == null){
+            canvas = new Canvas(screenWidth, screenHeight);
+            getChildren().add(canvas);
+        }
         gc = canvas.getGraphicsContext2D();
 
         //Vẽ background
-
-        try {
-            String backgroundPath = "C:/Users/ADMIN/Downloads/ProjectGame2D/Project_OOP_IT3100/res/background_1.jpg";
-            File file = new File(backgroundPath);
-            if (file.exists()) {
-                backgroundImage = new Image(file.toURI().toString());
-            } else {
-                System.out.println("Image not found at path: " + backgroundPath);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        String backgroundPath = "C:/Users/Vu/Downloads/Project_OOP_IT3100/res/background_1.jpg";
+        backgroundImage = new Image(Paths.get(backgroundPath).toUri().toString());
 
         // Vẽ background đã scale
         gc.drawImage(backgroundImage, 0, 0, screenWidth, screenHeight);
-
-        // Khởi tạo player
-        player = new Player(this, keyH);
-
-
         // Bạn có thể thêm mã để vẽ player và các đối tượng khác tại đây
-        player.draw(gc);  // Giả sử bạn có phương thức draw trong lớp Player để vẽ người chơi
-
-        // Tạo một vòng lặp game hoặc sử dụng AnimationTimer để cập nhật và vẽ lại
-        startGameLoop(gc);
+        //player.draw(gc);  // Giả sử bạn có phương thức draw trong lớp Player để vẽ người chơi
 
         // Nut pause
-        String pauseButtonPath = "C:/Users/ADMIN/Downloads/ProjectGame2D/Project_OOP_IT3100/res/ChapterImage/pause_button.png";
+        String pauseButtonPath = "C:/Users/Vu/Downloads/Project_OOP_IT3100/res/ChapterImage/pause_button.png";
         Image pauseButtonImage = new Image(Paths.get(pauseButtonPath).toUri().toString());
         ImageView pauseButtonView = new ImageView(pauseButtonImage);
         Button pauseButton = new Button();
         pauseButton.setGraphic(pauseButtonView);
         pauseButton.setStyle("-fx-background-color: transparent;");
-        AnchorPane.setTopAnchor(pauseButton, 10.0);
-        AnchorPane.setLeftAnchor(pauseButton, 665.0);
+        pauseButton.setLayoutX(665);
+        pauseButton.setLayoutY(10);
 
         PauseMenu pauseMenu = new PauseMenu(this, chapter1MusicPlayer, gameLauncher, player);
-        pauseButton.setOnAction(e -> {
-            isPaused = !isPaused;  // Chuyển đổi trạng thái tạm dừng
+        pauseButton.setOnAction(e ->{
+            isPaused = !isPaused;  // Đổi trạng thái Pause
             if (isPaused) {
-                count++;
-                pauseMenu.showPauseMenu(stage);  // Hiển thị menu Pause
-                chapter1MusicPlayer.pause();    // Dừng nhạc khi tạm dừng
+                if (gameLoop != null) gameLoop.stop(); // Dừng vòng lặp game
+                pauseMenu.showPauseMenu(stage); // Hiển thị menu Pause
+                if (chapter1MusicPlayer != null) chapter1MusicPlayer.pause(); // Dừng nhạc
+                count ++;
             } else {
-                  // Ẩn menu Pause
-                chapter1MusicPlayer.play();  // Phát lại nhạc khi tiếp tục
+                resumeGameActions(); // Tiếp tục game
             }
         });
 
-
-        // Tạo Canvas và GraphicsContext
-        /*Canvas canvas = new Canvas(screenWidth, screenHeight);
-        GraphicsContext gc = canvas.getGraphicsContext2D();*/
-
+        StackPane fightPane = new StackPane();
+        String fightPath = "C:/Users/Vu/Downloads/Project_OOP_IT3100/res/ChapterImage/fight_screen.png";
+        Image fightImage = new Image(Paths.get(fightPath).toUri().toString());
+        ImageView fightView = new ImageView(fightImage);
+        fightPane.getChildren().add(fightView);
         if (count == 0){
-            // tao man hinh fight
-            StackPane fightPane = new StackPane();
-            String fightPath = "C:/Users/ADMIN/Downloads/ProjectGame2D/Project_OOP_IT3100/res/ChapterImage/fight_screen.png";
-            Image fightImage = new Image(Paths.get(fightPath).toUri().toString());
-            ImageView fightView = new ImageView(fightImage);
-            fightPane.getChildren().add(fightView);
             fightPane.setVisible(true);
-            PauseTransition fightscene = new PauseTransition(Duration.seconds(1.2));
-            fightscene.setOnFinished(e -> {
-                fightPane.setVisible(false);     
+            PauseTransition fightTransition = new PauseTransition(Duration.seconds(1.2));
+            fightTransition.setOnFinished(e -> {
+                fightPane.setVisible(false);
             });
-            fightscene.play();
-            // Tạo giao diện chính
-            AnchorPane pausePane = new AnchorPane(pauseButton);
-            ImageView backgroundView = new ImageView(backgroundImage);
-            AnchorPane backgroundPane = new AnchorPane(backgroundView);
-            System.out.println("djt me may");
-            root = new StackPane(pausePane,backgroundPane, fightPane, canvas);  // Thêm canvas vào root
-            createOverlayPane(stage);
-            // Tạo scene và gắn vào stage
-            Scene scene = new Scene(root, screenWidth, screenHeight);
-            stage.setScene(scene);
-            stage.setTitle("Chapter 1");
-            stage.show();
-
-            // Bắt đầu các hành động game (gọi thread game loop)
-            startGameLoop(gc);  // Truyền GraphicsContext vào game loop
-            scene.setOnKeyPressed(event -> keyH.handleKeyPressed(event));
-            scene.setOnKeyReleased(event -> keyH.handleKeyReleased(event));
-            canvas.setFocusTraversable(true);
-            startGameLoop(gc);
+            fightTransition.play();
         } else {
-            // Tạo giao diện chính
-            AnchorPane pausePane = new AnchorPane(pauseButton);
-            ImageView backgroundView = new ImageView(backgroundImage);
-            AnchorPane backgroundPane = new AnchorPane(backgroundView);
-            root = new StackPane(backgroundPane, pausePane, canvas);  // Thêm canvas vào root
-            createOverlayPane(stage);
-            // Tạo scene và gắn vào stage
-            Scene scene = new Scene(root, screenWidth, screenHeight);
-            stage.setScene(scene);
-            stage.setTitle("Chapter 1");
-            stage.show();
-
-            // Bắt đầu các hành động game (gọi thread game loop)
-            startGameLoop(gc);  // Truyền GraphicsContext vào game loop
-            scene.setOnKeyPressed(event -> keyH.handleKeyPressed(event));
-            scene.setOnKeyReleased(event -> keyH.handleKeyReleased(event));
-            canvas.setFocusTraversable(true);
-            startGameLoop(gc);
+            fightPane.setVisible(false);
         }
+        PauseTransition result = new PauseTransition(Duration.seconds(5));
+        result.setOnFinished(e -> {
+            bossHealth = 0;
+        });
+        result.play();
+        // Tạo giao diện chính
+        AnchorPane pausePane = new AnchorPane(pauseButton);
+        root = new StackPane(canvas, fightPane, pausePane);  // Thêm canvas vào root
+        createOverlayPane(stage);
+        // Tạo scene và gắn vào stage
+        Scene scene = new Scene(root, screenWidth, screenHeight);
+        stage.setScene(scene);
+        stage.setTitle("Chapter 1");
+        stage.show();
+
+        // Bắt đầu các hành động game (gọi thread game loop)
+        scene.setOnKeyPressed(event -> keyH.handleKeyPressed(event));
+        scene.setOnKeyReleased(event -> keyH.handleKeyReleased(event));
+        canvas.setFocusTraversable(true);
+        startGameLoop(gc);
     }
 
 
 
     public void resumeGameActions() {
-        // Đánh dấu game không còn ở trạng thái Pause
         isPaused = false;
-
-        // Tiếp tục game loop
-        startGameLoop(gc);  // Đảm bảo gc đã được khởi tạo từ trước
+        // Tiếp tục vòng lặp game nếu đã tồn tại
+        if (gameLoop != null) {
+            gameLoop.start();
+        }
+        // Tiếp tục nhạc nếu đã bị tạm dừng
+        if (chapter1MusicPlayer != null && !chapter1MusicPlayer.getStatus().equals(MediaPlayer.Status.PLAYING)) {
+            chapter1MusicPlayer.play();
+        }
+        // Đảm bảo canvas lấy lại focus
+        if (canvas != null) {
+            canvas.requestFocus();
+        }
     }
 
 
@@ -282,7 +227,7 @@ public class Chapter1 extends Pane {
         resultView.setFitWidth(400);
         resultView.setFitHeight(400);
 
-        String continueButtonPath = "C:/Users/ADMIN/Downloads/ProjectGame2D/Project_OOP_IT3100/res/ChapterImage/continue_button.png";
+        String continueButtonPath = "C:/Users/Vu/Downloads/Project_OOP_IT3100/res/ChapterImage/continue_button.png";
         Image continueButtonImage = new Image(Paths.get(continueButtonPath).toUri().toString());
         ImageView continueButtonView = new ImageView(continueButtonImage);
         Button continueButton = new Button();
@@ -308,7 +253,7 @@ public class Chapter1 extends Pane {
             }
 
             // lay hinh anh thang/ thua
-            String resultPath = "C:/Users/ADMIN/Downloads/ProjectGame2D/Project_OOP_IT3100/res/ChapterImage/" + result.toLowerCase() + ".png";
+            String resultPath = "C:/Users/Vu/Downloads/Project_OOP_IT3100/res/ChapterImage/" + result.toLowerCase() + ".png";
             Image resultImage = new Image(Paths.get(resultPath).toUri().toString());
             ImageView resultView = (ImageView) overlayPane.getChildren().get(0);
             resultView.setImage(resultImage);
@@ -316,8 +261,12 @@ public class Chapter1 extends Pane {
         });
     }
     private void startGameLoop(GraphicsContext gc) {
-        // Sử dụng AnimationTimer để cập nhật và vẽ lại game mỗi khung hình
-        new javafx.animation.AnimationTimer() {
+        if (gameLoop != null) {
+            gameLoop.start();
+            return;
+        }
+        // Tạo vòng lặp mới nếu chưa tồn tại
+        gameLoop = new javafx.animation.AnimationTimer() {
             @Override
             public void handle(long now) {
                 if (isPaused) {
@@ -326,31 +275,27 @@ public class Chapter1 extends Pane {
 
                 // Cập nhật trạng thái game
                 player.update();
+                if (playerHealth <= 0) {
+                    stop(); // Dừng vòng lặp game
+                    showEndOverlay("defeat_screen"); // Hiển thị màn hình thua
+                    return;
+                }
+                if (bossHealth <= 0) {
+                    stop(); // Dừng vòng lặp game
+                    showEndOverlay("victory_screen"); // Hiển thị màn hình thắng
+                    return;
+                }
 
                 // Xóa màn hình và vẽ lại background
                 gc.clearRect(0, 0, screenWidth, screenHeight);
                 gc.drawImage(backgroundImage, 0, 0, screenWidth, screenHeight);
-
                 // Vẽ lại nhân vật
                 player.draw(gc);
             }
-        }.start();
-        new Thread(() -> {
-            try {
-                while (playerHealth > 0 && bossHealth > 0) {
-                    Thread.sleep(1000);
-                    // Kiểm tra tình trạng sức khỏe của nhân vật và boss mỗi giây
-                    // Có thể xử lý thêm logic trong này nếu cần
-                }
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }).start();
+        };
+
+
+        // Bắt đầu vòng lặp game
+        gameLoop.start();
     }
-
-
-
-
-
-
 }

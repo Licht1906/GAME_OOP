@@ -18,12 +18,12 @@ public class TutorialMenu {
 
     public void showTutorialMenu(Stage stage){
         // Tạo background cho menu
-        String imagePath = "C:/Users/ADMIN/Downloads/ProjectGame2D/Project_OOP_IT3100/res/MenuImage/menu_wallpaper.jpg";
+        String imagePath = "C:/Users/Vu/Downloads/Project_OOP_IT3100/res/MenuImage/menu_wallpaper.jpg";
         Image background = new Image(Paths.get(imagePath).toUri().toString());
         ImageView backgroundView = new ImageView(background);
 
         // Tạo nút back về menu chính
-        String backButtonPath = "C:/Users/ADMIN/Downloads/ProjectGame2D/Project_OOP_IT3100/res/MenuImage/back_button.png";
+        String backButtonPath = "C:/Users/Vu/Downloads/Project_OOP_IT3100/res/MenuImage/back_button.png";
         Image backButtonImage = new Image(Paths.get(backButtonPath).toUri().toString());
         ImageView backButtonView = new ImageView(backButtonImage);
         Button backButton = new Button();
@@ -39,7 +39,7 @@ public class TutorialMenu {
 
 
         // tao tutorial menu
-        String tutorialPath = "C:/Users/ADMIN/Downloads/ProjectGame2D/Project_OOP_IT3100/res/MenuImage/tutorial_menu.png";
+        String tutorialPath = "C:/Users/Vu/Downloads/Project_OOP_IT3100/res/MenuImage/tutorial_menu.png";
         Image menu = new Image(Paths.get(tutorialPath).toUri().toString());
         ImageView menuView = new ImageView(menu);
 

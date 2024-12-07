@@ -5,34 +5,17 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.LinearGradient;
 import javafx.scene.paint.Stop;
-
 import javafx.scene.image.Image;
-
-
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-
-
 import Chapter1.Chapter1;
 import entity.KeyHandlers;
 import javafx.scene.paint.LinearGradient;
 import javafx.scene.paint.Stop;
 
 public class Player extends Entity{
-    
-    
-
-
     public int maxHealth = 300; // Máu tối đa, giả sử là 3.000 để phù hợp với số trên hình ảnh
     private int currentHealth = 300; // Máu hiện tại
     private int barWidth = 400; // Chiều rộng của thanh máu
     private int barHeight = 20; // Chiều cao của thanh máu
-    
-
-
-
-
-
     private int animationFrame = 0; // Biến đếm khung hình hiện tại
     private int animationCounter = 0; // Biến đếm thời gian chuyển đổi khung hình
     private final int animationSpeed = 30; // Tốc độ chuyển đổi khung hình
@@ -56,7 +39,7 @@ public class Player extends Entity{
     public void setDefaultValues(){
         x = 0;
         y = 500;
-        speed = 4;
+        speed = 6;
         direction = "down";
     }
 
@@ -175,13 +158,6 @@ public class Player extends Entity{
         currentHealth = newHealth;
         // Gọi hàm vẽ lại thanh máu tại đây hoặc từ vòng lặp game
     }
-
-
-
-
-
-
-
     public void update() {
         // Kiểm tra xem phím "J" có được nhấn không
         if (keyH.jPressed) {

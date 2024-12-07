@@ -23,16 +23,16 @@ public class SettingMenu {
 
     public void showSettingMenu(Stage stage){
         // Tạo background cho menu
-        String imagePath = "C:/Users/ADMIN/Downloads/ProjectGame2D/Project_OOP_IT3100/res/MenuImage/menu_wallpaper.jpg";
+        String imagePath = "C:/Users/Vu/Downloads/Project_OOP_IT3100/res/MenuImage/menu_wallpaper.jpg";
         Image background = new Image(Paths.get(imagePath).toUri().toString());
         ImageView backgroundView = new ImageView(background);
         // tao setting menu
-        String settingPath = "C:/Users/ADMIN/Downloads/ProjectGame2D/Project_OOP_IT3100/res/MenuImage/setting_menu.png";
+        String settingPath = "C:/Users/Vu/Downloads/Project_OOP_IT3100/res/MenuImage/setting_menu.png";
         Image menu = new Image(Paths.get(settingPath).toUri().toString());
         ImageView menuView = new ImageView(menu);
 
         // Tạo nút back về menu chính
-        String backButtonPath = "C:/Users/ADMIN/Downloads/ProjectGame2D/Project_OOP_IT3100/res/MenuImage/back_button.png";
+        String backButtonPath = "C:/Users/Vu/Downloads/Project_OOP_IT3100/res/MenuImage/back_button.png";
         Image backButtonImage = new Image(Paths.get(backButtonPath).toUri().toString());
         ImageView backButtonView = new ImageView(backButtonImage);
         Button backButton = new Button();
@@ -47,8 +47,8 @@ public class SettingMenu {
         });
 
         // tao icon volume va mute
-        String volumeImagePath = "C:/Users/ADMIN/Downloads/ProjectGame2D/Project_OOP_IT3100/res/MenuImage/volume.png";
-        String muteImagePath = "C:/Users/ADMIN/Downloads/ProjectGame2D/Project_OOP_IT3100/res/MenuImage/mute.png";
+        String volumeImagePath = "C:/Users/Vu/Downloads/Project_OOP_IT3100/res/MenuImage/volume.png";
+        String muteImagePath = "C:/Users/Vu/Downloads/Project_OOP_IT3100/res/MenuImage/mute.png";
         Image volumeIconImage = new Image(Paths.get(volumeImagePath).toUri().toString());
         Image muteIconImage = new Image(Paths.get(muteImagePath).toUri().toString());
 
@@ -66,7 +66,7 @@ public class SettingMenu {
         volumeSlider.setPrefWidth(200);
 
         // ap dung css vao nut dieu chinh am luong
-        volumeSlider.getStylesheets().add("file:/C:/Users/ADMIN/Downloads/ProjectGame2D/Project_OOP_IT3100/res/MenuImage/styles.css");
+        volumeSlider.getStylesheets().add("file:/C:/Users/Vu/Downloads/Project_OOP_IT3100/res/MenuImage/styles.css");
 
         // vi tri cua slider
         AnchorPane.setLeftAnchor(volumeSlider, 590.0);

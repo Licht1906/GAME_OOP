@@ -36,12 +36,12 @@ public class PauseMenu{
 
     public void showPauseMenu(Stage stage){
         // tao pause menu
-        String imagePath = "C:/Users/ADMIN/Downloads/ProjectGame2D/Project_OOP_IT3100/res/ChapterImage/pause_screen.png";
+        String imagePath = "C:/Users/Vu/Downloads/Project_OOP_IT3100/res/ChapterImage/pause_screen.png";
         Image background = new Image(Paths.get(imagePath).toUri().toString());
         ImageView backgroundView = new ImageView(background);
 
         // tao nut quay tro ve chapter menu
-        String exitButtonPath = "C:/Users/ADMIN/Downloads/ProjectGame2D/Project_OOP_IT3100/res/ChapterImage/exit_button.png";
+        String exitButtonPath = "C:/Users/Vu/Downloads/Project_OOP_IT3100/res/ChapterImage/exit_button.png";
         Image exitButtonImage = new Image(Paths.get(exitButtonPath).toUri().toString());
         ImageView exitButtonView = new ImageView(exitButtonImage);
         Button exitButton = new Button();
@@ -59,7 +59,7 @@ public class PauseMenu{
         });
 
         // tao nut de tiep tuc game
-        String resumeButtonPath = "C:/Users/ADMIN/Downloads/ProjectGame2D/Project_OOP_IT3100/res/ChapterImage/resume_button.png";
+        String resumeButtonPath = "C:/Users/Vu/Downloads/Project_OOP_IT3100/res/ChapterImage/resume_button.png";
         Image resumeButtonImage = new Image(Paths.get(resumeButtonPath).toUri().toString());
         ImageView resumeButtonView = new ImageView(resumeButtonImage);
         Button resumeButton = new Button();
@@ -74,8 +74,8 @@ public class PauseMenu{
         });
 
         // tao icon volume va mute
-        String volumeImagePath = "C:/Users/ADMIN/Downloads/ProjectGame2D/Project_OOP_IT3100/res/ChapterImage/volume.png";
-        String muteImagePath = "C:/Users/ADMIN/Downloads/ProjectGame2D/Project_OOP_IT3100/res/ChapterImage/mute.png";
+        String volumeImagePath = "C:/Users/Vu/Downloads/Project_OOP_IT3100/res/ChapterImage/volume.png";
+        String muteImagePath = "C:/Users/Vu/Downloads/Project_OOP_IT3100/res/ChapterImage/mute.png";
         Image volumeIconImage = new Image(Paths.get(volumeImagePath).toUri().toString());
         Image muteIconImage = new Image(Paths.get(muteImagePath).toUri().toString());
 
@@ -93,7 +93,7 @@ public class PauseMenu{
         volumeSlider.setPrefWidth(200);
 
         // ap dung css vao nut dieu chinh am luong
-        volumeSlider.getStylesheets().add("file:/C:/Users/ADMIN/Downloads/ProjectGame2D/Project_OOP_IT3100/res/ChapterImage/styles.css");
+        volumeSlider.getStylesheets().add("file:/C:/Users/Vu/Downloads/Project_OOP_IT3100/res/ChapterImage/styles.css");
 
         // vi tri cua slider
         AnchorPane.setLeftAnchor(volumeSlider, 590.0);

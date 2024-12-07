@@ -42,7 +42,7 @@ public class Chapter2 {
         isPlaying = true;
         isPaused = false;
         this.stage = stage;
-        String musicPath = "C:/Users/ADMIN/Downloads/ProjectGame2D/Project_OOP_IT3100/res/Sound/chapter2_sound.mp3";
+        String musicPath = "C:/Users/Vu/Downloads/Project_OOP_IT3100/res/Sound/chapter2_sound.mp3";
         Media music = new Media(Paths.get(musicPath).toUri().toString());
         chapter2MusicPlayer = new MediaPlayer(music);
 
@@ -91,12 +91,12 @@ public class Chapter2 {
     public void showChapter2Background(Stage stage){
         // Tạo giao diện cho Chapter 2
         this.stage = stage;
-        String backgroundPath = "C:/Users/ADMIN/Downloads/ProjectGame2D/Project_OOP_IT3100/res/Background/background_chap2chap3.png";
+        String backgroundPath = "C:/Users/Vu/Downloads/Project_OOP_IT3100/res/Background/background_chap2chap3.png";
         Image background = new Image(Paths.get(backgroundPath).toUri().toString());
         ImageView backgroundView = new ImageView(background);
 
         //nut pause
-        String pauseButtonPath = "C:/Users/ADMIN/Downloads/ProjectGame2D/Project_OOP_IT3100/res/ChapterImage/pause_button.png";
+        String pauseButtonPath = "C:/Users/Vu/Downloads/Project_OOP_IT3100/res/ChapterImage/pause_button.png";
         Image pauseButtonImage = new Image(Paths.get(pauseButtonPath).toUri().toString());
         ImageView pauseButtonView = new ImageView(pauseButtonImage);
         Button pauseButton = new Button();
@@ -115,7 +115,7 @@ public class Chapter2 {
         if (count == 0){
             // tao man hinh fight
             StackPane fightPane = new StackPane();
-            String fightPath = "C:/Users/ADMIN/Downloads/ProjectGame2D/Project_OOP_IT3100/res/ChapterImage/fight_screen.png";
+            String fightPath = "C:/Users/Vu/Downloads/Project_OOP_IT3100/res/ChapterImage/fight_screen.png";
             Image fightImage = new Image(Paths.get(fightPath).toUri().toString());
             ImageView fightView = new ImageView(fightImage);
             fightPane.getChildren().add(fightView);
@@ -152,9 +152,6 @@ public class Chapter2 {
             try {
                 while (playerHealth > 0 && bossHealth > 0){
                     Thread.sleep(1000);
-
-
-
                     if (playerHealth <= 0){
                         showEndOverlay("defeat_screen");
                         break;
@@ -184,7 +181,7 @@ public class Chapter2 {
         resultView.setFitWidth(400);
         resultView.setFitHeight(400);
 
-        String continueButtonPath = "C:/Users/ADMIN/Downloads/ProjectGame2D/Project_OOP_IT3100/res/ChapterImage/continue_button.png";
+        String continueButtonPath = "C:/Users/Vu/Downloads/Project_OOP_IT3100/res/ChapterImage/continue_button.png";
         Image continueButtonImage = new Image(Paths.get(continueButtonPath).toUri().toString());
         ImageView continueButtonView = new ImageView(continueButtonImage);
         Button continueButton = new Button();
@@ -210,7 +207,7 @@ public class Chapter2 {
             }
 
             // lay hinh anh thang/ thua
-            String resultPath = "C:/Users/ADMIN/Downloads/ProjectGame2D/Project_OOP_IT3100/res/ChapterImage/" + result.toLowerCase() + ".png";
+            String resultPath = "C:/Users/Vu/Downloads/Project_OOP_IT3100/res/ChapterImage/" + result.toLowerCase() + ".png";
             Image resultImage = new Image(Paths.get(resultPath).toUri().toString());
             ImageView resultView = (ImageView) overlayPane.getChildren().get(0);
             resultView.setImage(resultImage);
